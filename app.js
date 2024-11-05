@@ -1,20 +1,4 @@
-// const QRCode = require('qrcode');
-// const express = require('express')
-// const app = express()
 
-// app.get('/qr', (req, res)=>{
-//     QRCode.toDataURL('https://ekcs.co/', (err, url) => {
-//     if (err) { 
-//         console.error(err);
-//     }else
-//         res.send(`<img src="${url}" alt="QR Code">`);
-//     });
-// })
-
-// const PORT = 3000;
-// app.listen(PORT, ()=>{
-//     console.log(`Server is running on http://localhost:${PORT}`);
-// })
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
@@ -49,10 +33,8 @@ io.on("connection", (socket) => {
     console.log(`Socket ${socket.id} joined session ${sessionId}`);
   });
 
-  // Phone sends control commands
   socket.on("control", (data) => {
     const { sessionId, action } = data;
-    // Emit the action to the desktop in the same session
     io.to(sessionId).emit("perform-action", action);
   });
 });

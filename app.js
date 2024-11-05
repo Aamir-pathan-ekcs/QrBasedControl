@@ -1,18 +1,20 @@
 const express = require("express");
 const http = require("http");
-const socketIO =  require("socket.io")(server, {
+const QrCode = require("qrcode");
+const { v4: uuidv4 } = require("uuid");
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.static("public"));
+
+const httpServer = http.createServer(app);
+const io = require("socket.io")(httpServer, {
   cors: {
     origin: "https://dev.ekcs.co/aamir/ScanWebControl/demoQR/",
     methods: ["GET", "POST"],
   },
 });
-const QrCode = require("qrcode");
-const { v4: uuidv4 } = require("uuid");
-const cors = require("cors");
-const app = express();
-app.use(cors());
-const httpServer = http.createServer(app);
-const io = socketIO(httpServer);
 
 app.use(express.static("public"));
 
@@ -41,6 +43,7 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(3000, () => {
-  console.log("Server listening");
+const PORT = process.env.PORT || 3000;
+httpServer.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });

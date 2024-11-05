@@ -1,7 +1,7 @@
 const express = require("express");
 const http = require("http");
 const socketIO = require("socket.io");
-const QrCode = require("r");
+const QrCode = require("qrcode");
 const { v4: uuidv4 } = require("uuid");
 
 const app = express();

@@ -1,6 +1,11 @@
 const express = require("express");
 const http = require("http");
-const socketIO = require("socket.io");
+const socketIO =  require("socket.io")(server, {
+  cors: {
+    origin: "https://dev.ekcs.co/aamir/ScanWebControl/demoQR/",
+    methods: ["GET", "POST"],
+  },
+});
 const QrCode = require("qrcode");
 const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");

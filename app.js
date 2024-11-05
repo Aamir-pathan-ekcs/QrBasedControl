@@ -1,29 +1,29 @@
 const express = require("express");
 const http = require("http");
-const socketIo = require("socket.io");
-const QRCode = require("qrcode");
+const socketIO = require("socket.io");
+const QrCode = require("r");
 const { v4: uuidv4 } = require("uuid");
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+const httpServer = http.createServer(app);
+const io = socketIO(httpServer);
 
 app.use(express.static("public"));
 
 app.get("/generateCode", async (req, res) => {
   const sessionId = uuidv4();
-  const url = `https://qrbasedcontrol.onrender.com/index2.html?sessionId=${sessionId}`;
+  const urlSession = `https://qrbasedcontrol.onrender.com/index2.html?sessionId=${sessionId}`;
 
   try {
-    const qrCode = await QRCode.toDataURL(url);
+    const qrCode = await QrCode.toDataURL(urlSession);
     res.send({ qrCode, sessionId });
   } catch (err) {
-    res.status(500).send("Error generating QR code");
+    res.status(500).send("Generating QR code Error");
   }
 });
 
 io.on("connection", (socket) => {
-  console.log("Client connected:", socket.id);
+  console.log("Client :", socket.id);
 
   socket.on("join-session", (sessionId) => {
     socket.join(sessionId);
@@ -35,6 +35,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => {
+httpServer.listen(3000, () => {
   console.log("Server listening");
 });

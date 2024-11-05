@@ -6,7 +6,7 @@
 </head>
 <body>
   <h1>QR Code</h1>
-  <img id="qrCode" alt="QR Code will appear here" />
+  <img id="QrCode" alt="QR Code will appear here" />
 
   <div id="controlledContent">Click From phone this content will change based on phone actions.</div>
   <script src="/socket.io/socket.io.js"></script>
@@ -17,7 +17,7 @@
     fetch("/generateCode")
       .then(response => response.json())
       .then(data => {
-        document.getElementById("qrCode").src = data.qrCode;
+        document.getElementById("QrCode").src = data.qrCode;
         sessionId = data.sessionId;
         socket.emit("join-session", sessionId);
       });
@@ -27,7 +27,7 @@
       if (action === "changeColor") {
         controlledContent.style.backgroundColor = "lightblue";
       } else if (action === "showAlert") {
-        alert("Phone triggered an alert!");
+        alert("From Phone alert");
       }
     });
   </script>

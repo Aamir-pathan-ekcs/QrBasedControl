@@ -5,14 +5,20 @@ const { v4: uuidv4 } = require("uuid");
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://dev.ekcs.co",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+}));
 app.use(express.static("public"));
 
 const httpServer = http.createServer(app);
 const io = require("socket.io")(httpServer, {
   cors: {
-    origin: "https://dev.ekcs.co/aamir/ScanWebControl/demoQR/",
+    origin: "https://dev.ekcs.co", // Allow this origin
     methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
   },
 });
 

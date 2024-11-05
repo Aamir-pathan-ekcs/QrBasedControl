@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Phone Control Page</title>
 </head>
 <body>
   <h1>Control web Page</h1>
-  <button id="changeColor">Color</button>
-  <button id="showAlert">Show </button>
+  <button id="spinButton">Spin Wheel</button>&nbsp;
 
   <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
   <script>
@@ -18,13 +19,13 @@
     if (sessionId) {
       socket.emit("join-session", sessionId);
 
-      document.getElementById("changeColor").onclick = () => {
-        socket.emit("control", { sessionId, action: "changeColor" });
+      document.getElementById("spinButton").onclick = () => {
+        socket.emit("control", { sessionId, action: "spin" });
       };
 
-      document.getElementById("showAlert").onclick = () => {
-        socket.emit("control", { sessionId, action: "showAlert" });
-      };
+      // document.getElementById("showAlert").onclick = () => {
+      //   socket.emit("control", { sessionId, action: "showAlert" });
+      // };
     }
   </script>
 </body>

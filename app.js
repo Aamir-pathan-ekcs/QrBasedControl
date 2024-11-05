@@ -15,7 +15,7 @@ app.use(express.static("public"));
 const httpServer = http.createServer(app);
 const io = require("socket.io")(httpServer, {
   cors: {
-    origin: "https://dev.ekcs.co", // Allow this origin
+    origin: "https://dev.ekcs.co",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,

@@ -3,8 +3,9 @@ const http = require("http");
 const socketIO = require("socket.io");
 const QrCode = require("qrcode");
 const { v4: uuidv4 } = require("uuid");
-
+const cors = require("cors");
 const app = express();
+app.use(cors());
 const httpServer = http.createServer(app);
 const io = socketIO(httpServer);
 

@@ -11,7 +11,7 @@
 
   <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
   <script>
-    const socket = io();
+    const socket = io("https://qrbasedcontrol.onrender.com");
     const urlParams = new URLSearchParams(window.location.search);
     const sessionId = urlParams.get("sessionId");
 

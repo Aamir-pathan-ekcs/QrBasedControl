@@ -1,4 +1,3 @@
-
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
@@ -9,13 +8,11 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Serve static files
 app.use(express.static("public"));
 
-// Route to generate a QR code with a unique session ID
-app.get("/generate", async (req, res) => {
+app.get("/generateCode", async (req, res) => {
   const sessionId = uuidv4();
-  const url = `https://qrbasedcontrol.onrender.com/phone.html?sessionId=${sessionId}`;
+  const url = `http://localhost:3000/phone.html?sessionId=${sessionId}`;
 
   try {
     const qrCode = await QRCode.toDataURL(url);
@@ -32,7 +29,6 @@ io.on("connection", (socket) => {
     socket.join(sessionId);
     console.log(`Socket ${socket.id} joined session ${sessionId}`);
   });
-
   socket.on("control", (data) => {
     const { sessionId, action } = data;
     io.to(sessionId).emit("perform-action", action);

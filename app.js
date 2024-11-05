@@ -12,7 +12,7 @@ app.use(express.static("public"));
 
 app.get("/generateCode", async (req, res) => {
   const sessionId = uuidv4();
-  const url = `https://qrbasedcontrol.onrender.com/phone.html?sessionId=${sessionId}`;
+  const url = `https://qrbasedcontrol.onrender.com/index2.html?sessionId=${sessionId}`;
 
   try {
     const qrCode = await QRCode.toDataURL(url);

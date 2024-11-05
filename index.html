@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Scanner</title>
+</head>
+<body>
+  <h1>QR Code Scanner</h1>
+  <input type="text" id="imagePath" placeholder="Enter image path or URL" />
+  <button id="scanButton">Scan QR Code</button>
+  <p id="qrResult">QR Code Result: <span id="result"></span></p>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    document.getElementById("scanButton").addEventListener("click", () => {
+      const imagePath = document.getElementById("imagePath").value;
+      socket.emit("scan-qr", imagePath);
+    });
+
+    socket.on("qr-scanned", (data) => {
+      document.getElementById("result").innerText = data;
+      // Control elements based on the QR code content
+      if (data === "someAction") {
+        // Trigger an action on the webpage
+        alert("Action triggered based on QR code!");
+      }
+    });
+  </script>
+</body>
+</html>

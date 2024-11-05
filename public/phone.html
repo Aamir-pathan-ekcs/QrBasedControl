@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phone Control Page</title>
+</head>
+<body>
+  <h1>Control the Desktop Page</h1>
+  <button id="changeColor">Change Color</button>
+  <button id="showAlert">Show Alert</button>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    const urlParams = new URLSearchParams(window.location.search);
+    const sessionId = urlParams.get("sessionId");
+
+    if (sessionId) {
+      socket.emit("join-session", sessionId);
+
+      document.getElementById("changeColor").onclick = () => {
+        socket.emit("control", { sessionId, action: "changeColor" });
+      };
+
+      document.getElementById("showAlert").onclick = () => {
+        socket.emit("control", { sessionId, action: "showAlert" });
+      };
+    }
+  </script>
+</body>
+</html>

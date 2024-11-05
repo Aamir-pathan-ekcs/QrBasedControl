@@ -31,7 +31,7 @@ app.use(express.static("public"));
 // Route to generate a QR code with a unique session ID
 app.get("/generate", async (req, res) => {
   const sessionId = uuidv4();
-  const url = `http://localhost:3000/phone.html?sessionId=${sessionId}`;
+  const url = `https://qrbasedcontrol.onrender.com/phone.html?sessionId=${sessionId}`;
 
   try {
     const qrCode = await QRCode.toDataURL(url);
@@ -58,5 +58,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(3000, () => {
-  console.log("Server listening on http://localhost:3000");
+  console.log("Server listening");
 });

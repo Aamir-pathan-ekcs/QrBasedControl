@@ -26,7 +26,7 @@ app.use(express.static("public"));
 
 app.get("/generateCode", async (req, res) => {
   const sessionId = uuidv4();
-  const urlSession = `https://qrbasedcontrol.onrender.com/index2.html?sessionId=${sessionId}`;
+  const urlSession = `https://dev.ekcs.co/aamir/ScanWebControl/phoneControl/index.html?sessionId=${sessionId}`;
 
   try {
     const qrCode = await QrCode.toDataURL(urlSession);

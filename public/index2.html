@@ -5,11 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Phone Control Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap" rel="stylesheet">
+  <style type="text/css">
+    body{background: #2e3343; font-family: "Nunito", serif; font-optical-sizing: auto; font-weight: 400; font-style: normal; color: #fff;}
+    .mainBox{width:250px; height: 100vh; margin: 0px auto; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;}
+    .mainBox h1{font-style: 30px; line-height: 1.2;}
+    .mainBox button { background: #F07E26; color: #fff; font-weight: 500; border: 0px; padding: 9px 32px 10px; font-size: 15px; cursor: pointer; transition: all 0.35s ease-in-out;}
+    .mainBox button:hover{background:#535D5B;}
+  </style>
 </head>
 <body>
-  <h1>Control web Page</h1>
-  <button id="spinButton">Spin Wheel</button>&nbsp;
-
+  <div class="mainBox">
+    <h1>Tap to play and win an offer</h1>
+    <button id="spinButton">Spin Wheel</button>
+  </div>
   <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
   <script>
     const socket = io("https://qrbasedcontrol.onrender.com");
